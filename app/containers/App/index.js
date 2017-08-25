@@ -8,11 +8,12 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import withProgressBar from 'components/ProgressBar';
+
 
 const AppWrapper = styled.div`
   max-width: calc(768px + 16px * 2);
@@ -23,20 +24,30 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
+const theme = {
+  primary: '#ff9999',
+  secondary: '#66ffcc',
+  success: '#8aff80',
+  danger: '#ff9580',
+  warning: 'ffd580',
+};
+
 export function App(props) {
   return (
-    <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-        meta={[
-          { name: 'description', content: 'A React.js Boilerplate application' },
-        ]}
-      />
-      <Header />
-      {React.Children.toArray(props.children)}
-      <Footer />
-    </AppWrapper>
+    <ThemeProvider theme={theme}>
+      <AppWrapper>
+        <Helmet
+          titleTemplate="%s - React.js Boilerplate"
+          defaultTitle="React.js Boilerplate"
+          meta={[
+            { name: 'description', content: 'A React.js Boilerplate application' },
+          ]}
+        />
+        <Header />
+        {React.Children.toArray(props.children)}
+        <Footer />
+      </AppWrapper>
+    </ThemeProvider>
   );
 }
 
